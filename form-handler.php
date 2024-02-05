@@ -1,32 +1,46 @@
 <?php
-$name = $_post['name']
-$visitor_email  = $_post['email']
-$subject  = $_post['subject']
-$message  = $_post['message']
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+
+$name = $_POST['name'];
+$email = $_POST['email'];
+$subject = $_POST['subject'];
+$message = $_POST['message'];
+
+$mailheader = "From: " . $name . "<" . $email . ">\r\n";
+$mailheader .= "Reply-To: " . $email . "\r\n";
+$mailheader .= "Content-Type: text/plain; charset=utf-8\r\n";
+
+
+$recipient = "garimagautam595@gmail.com";
+
+mail($recipient, $subject, $message, $mailheader) or die("Error!");
+
+echo'
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Thank you for contacting me. I will get back to you as soon as possible!</h1>
+        <p class="back">Go back to the <a href="contact.html">contactpage</a>.</p>
+        
+    </div>
+</body>
+</html>
 
 
 
-$email_from ='info@yourwebsite.com';
-
-
-$email_subject ='New Form Submission';
-
-
-$email_body = "User Name: $name.\n".
-               "User Email: $visitor_email.\n".
-               "subject: $subject.\n".
-               "User Message : $message.\n";
-
-$to = 'garimagautams123@gmail.com';
-
-$headers= "From: $email_from\r\n";
-
-$headers .= "Reply-To: $visitor_email \r\n";
-
-mail($to,$email_subject,$email_body,$headers);
-
-header("location: contact.html");
-
+';
 
 
 ?>
